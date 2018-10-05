@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Downshift from 'downshift';
 import matchSorter from 'match-sorter';
 import { createGlobalStyle } from 'styled-components';
+import { Flex, Box, Heading, Text, Button } from 'rebass';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -31,6 +32,10 @@ class App extends Component {
     this.setState(prev => ({ myIngredients: [...prev.myIngredients, newIng] }));
     reset({ inputValue: '' });
   };
+  removeIngredient = ing => () =>
+    this.setState(({ myIngredients }) => ({
+      myIngredients: myIngredients.filter(x => x !== ing),
+    }));
   render() {
     const { drinks, ingredients, myIngredients } = this.state;
     if (!drinks.length || !ingredients.length) return <div>Loading...</div>;
@@ -84,12 +89,24 @@ class App extends Component {
               </div>
             )}
           </Downshift>
+            <Box as="ul">
           {myIngredients.map(ing => (
-            <Text as="li" key={`myIng-${ing}`}>
-              {ing}
-            </Text>
+                <Flex as="li" key={`myIng-${ing}`} alignItems="center">
+                  <Text as="span">{ing}</Text>
+                  <Button
+                    onClick={this.removeIngredient(ing)}
+                    ml={1}
+                    bg="transparent"
+                    color="hsl(200, 10%, 70%)"
+                    px={1}
+                    py={1}
+                  >
+                    &times;
+                  </Button>
+                </Flex>
           ))}
         </Box>
+          </Box>
         <Box width={1 / 2}>
           <Heading as="h3">Drinks</Heading>
           <Box as="ul">
