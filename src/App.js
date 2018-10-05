@@ -111,15 +111,29 @@ class App extends Component {
           <Heading as="h3">Drinks</Heading>
           <Box as="ul">
             {drinks
-              .slice(0, 1)
-              .filter(drink =>
-                drink.ingredients.every(
-                  ing => console.log(ing) || myIngredients.includes(ing)
-                )
-              )
+                .reduce((acc, drink) => {
+                  const missing = drink.ingredients.filter(
+                    ing => !myIngredients.includes(ing)
+                  );
+                  if (missing.length >= 2) return acc;
+                  return [...acc, { ...drink, missing }];
+                }, [])
               .map(drink => (
-                <Text as="li" key={drink.idDrink}>
-                  {drink.strDrink}
+                  <Text as="li" key={drink.idDrink} mt={'1rem'}>
+                    <Text as="span">{drink.strDrink}</Text>
+                    <Box as="ul" ml={2} fontSize={2}>
+                      {drink.ingredients.map(ing => (
+                        <Text
+                          as="li"
+                          key={`${drink.idDrink}-ing-${ing}`}
+                          color={
+                            drink.missing.includes(ing) ? 'red' : 'currentColor'
+                          }
+                        >
+                          {ing}
+                        </Text>
+                      ))}
+                    </Box>
                 </Text>
               ))}
           </Box>
