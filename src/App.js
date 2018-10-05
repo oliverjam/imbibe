@@ -1,9 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Downshift from 'downshift';
 import matchSorter from 'match-sorter';
-import { Flex, Box, Heading, Text } from 'rebass';
-// import { ThemeProvider } from 'emotion-theming';
+import { createGlobalStyle } from 'styled-components';
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: hsl(200, 10%, 20%);
+  }
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+`;
 class App extends Component {
   componentDidMount() {
     import('./drinks').then(drinks =>
@@ -26,6 +35,8 @@ class App extends Component {
     const { drinks, ingredients, myIngredients } = this.state;
     if (!drinks.length || !ingredients.length) return <div>Loading...</div>;
     return (
+      <Fragment>
+        <GlobalStyle />
       <Flex>
         <Box width={1 / 2}>
           <Heading as="h3">Ingredients</Heading>
@@ -97,6 +108,7 @@ class App extends Component {
           </Box>
         </Box>
       </Flex>
+      </Fragment>
     );
   }
 }
