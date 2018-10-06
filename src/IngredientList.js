@@ -9,15 +9,17 @@ const IngredientList = ({
   removeIngredient,
 }) => (
   <Fragment>
-    <Heading as="h3">Ingredients</Heading>
     <IngredientsSearch
       ingredients={ingredients}
       selectIngredient={selectIngredient}
     />
-    <Box as="ul">
+    <Heading as="h3" mt={3}>
+      My Ingredients
+    </Heading>
+    <Box as="ul" mt={2}>
       {myIngredients.map(ing => (
         <Flex as="li" key={`myIng-${ing}`} alignItems="center">
-          <Text as="span">{ing}</Text>
+          <Text as="span">{ing[0].toUpperCase() + ing.slice(1)}</Text>
           <Button
             onClick={removeIngredient(ing)}
             ml={1}
