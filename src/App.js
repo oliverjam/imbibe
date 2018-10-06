@@ -1,31 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { Router } from '@reach/router';
-import { createGlobalStyle } from 'styled-components';
 import { Box } from 'rebass';
 
+import GlobalStyle from './GlobalStyle';
 import Nav from './Nav';
 import IngredientList from './IngredientList';
 import DrinksList from './DrinksList';
-
-const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-    margin: 0;
-  }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: hsl(200, 10%, 20%);
-    background-color: hsl(20, 10%, 97%);
-  }
-  ul {
-    padding: 0;
-    list-style: none;
-  }
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-`;
 
 class App extends Component {
   componentDidMount() {
