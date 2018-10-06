@@ -15,15 +15,21 @@ const DrinksList = ({ drinks, myIngredients }) => (
         }, [])
         .map(drink => (
           <Text as="li" key={drink.idDrink} mt={'1rem'}>
-            <Text as="span">{drink.strDrink}</Text>
-            <Box as="ul" ml={2} fontSize={2}>
+            <Text
+              as="span"
+              fontWeight="bold"
+              css={{ textTransform: 'capitalize' }}
+            >
+              {drink.strDrink}
+            </Text>
+            <Box as="ul" fontSize={2}>
               {drink.ingredients.map(ing => (
                 <Text
                   as="li"
                   key={`${drink.idDrink}-ing-${ing}`}
                   color={drink.missing.includes(ing) ? 'red' : 'currentColor'}
                 >
-                  {ing}
+                  {ing[0].toUpperCase() + ing.slice(1)}
                 </Text>
               ))}
             </Box>
