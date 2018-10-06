@@ -3,9 +3,34 @@ import styled from 'styled-components';
 import { Link } from '@reach/router';
 import { Box, Flex } from 'rebass';
 
+const Container = styled.nav`
+  position: fixed;
+  height: 2.5rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+`;
+
+const NavList = styled.ul`
+  display: flex;
+  height: 100%;
+`;
+
+const NavItem = styled.li`
+  display: block;
+  height: 100%;
+  flex: 1 0 auto;
+  /* display: grid;
+  place-content: center; */
+`;
+
 const NavLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  padding: 0.5rem;
+  height: 100%;
   text-align: center;
   color: white;
   background-color: hsl(200, 10%, 50%);
@@ -24,16 +49,16 @@ const NavLink = styled(Link)`
 `;
 
 const Nav = () => (
-  <Box as="nav">
-    <Flex as="ul">
-      <Flex as="li" width={1 / 2}>
+  <Container>
+    <NavList>
+      <NavItem>
         <NavLink to="/">Ingredients</NavLink>
-      </Flex>
-      <Flex as="li" width={1 / 2}>
+      </NavItem>
+      <NavItem>
         <NavLink to="/drinks">Drinks</NavLink>
-      </Flex>
-    </Flex>
-  </Box>
+      </NavItem>
+    </NavList>
+  </Container>
 );
 
 export default Nav;

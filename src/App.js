@@ -4,6 +4,7 @@ import { Box } from 'rebass';
 
 import GlobalStyle from './GlobalStyle';
 import Nav from './Nav';
+import IngredientSearch from './IngredientSearch';
 import IngredientList from './IngredientList';
 import DrinksList from './DrinksList';
 
@@ -51,24 +52,26 @@ class App extends Component {
     return (
       <Fragment>
         <GlobalStyle />
+        <Nav />
+        <IngredientSearch
+          ingredients={ingredients}
+          selectIngredient={this.selectIngredient}
+        />
         <Box p={3} mx="auto" css={{ maxWidth: '30rem' }}>
-          <Nav />
-          <Box mt={3}>
-            <Router>
-              <IngredientList
-                path="/"
-                ingredients={ingredients}
-                myIngredients={myIngredients}
-                selectIngredient={this.selectIngredient}
-                removeIngredient={this.removeIngredient}
-              />
-              <DrinksList
-                path="/drinks"
-                drinks={drinks}
-                myIngredients={myIngredients}
-              />
-            </Router>
-          </Box>
+          <Router>
+            <IngredientList
+              path="/"
+              ingredients={ingredients}
+              myIngredients={myIngredients}
+              selectIngredient={this.selectIngredient}
+              removeIngredient={this.removeIngredient}
+            />
+            <DrinksList
+              path="/drinks"
+              drinks={drinks}
+              myIngredients={myIngredients}
+            />
+          </Router>
         </Box>
       </Fragment>
     );

@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import IngredientsSearch from './IngredientSearch';
 import { Flex, Box, Heading, Text, Button } from 'rebass';
 
 const IngredientList = ({
@@ -9,10 +8,6 @@ const IngredientList = ({
   removeIngredient,
 }) => (
   <Fragment>
-    <IngredientsSearch
-      ingredients={ingredients}
-      selectIngredient={selectIngredient}
-    />
     <Heading as="h3" mt={3}>
       My Ingredients
     </Heading>
