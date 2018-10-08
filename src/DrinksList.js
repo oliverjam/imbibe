@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+
+import Drink from './Drink';
 import { Box, Heading, Text } from 'rebass';
 
 const DrinksList = ({ drinks, myIngredients }) => (
@@ -14,26 +16,27 @@ const DrinksList = ({ drinks, myIngredients }) => (
           return [...acc, { ...drink, missing }];
         }, [])
         .map(drink => (
-          <Text as="li" key={drink.idDrink} mt={'1rem'}>
-            <Text
-              as="span"
-              fontWeight="bold"
-              css={{ textTransform: 'capitalize' }}
-            >
-              {drink.strDrink}
-            </Text>
-            <Box as="ul" fontSize={2}>
-              {drink.ingredients.map(ing => (
-                <Text
-                  as="li"
-                  key={`${drink.idDrink}-ing-${ing}`}
-                  color={drink.missing.includes(ing) ? 'red' : 'currentColor'}
-                >
-                  {ing[0].toUpperCase() + ing.slice(1)}
-                </Text>
-              ))}
-            </Box>
-          </Text>
+          <Drink key={drink.idDrink} {...drink} />
+          // <Text as="li" key={drink.idDrink} mt={'1rem'}>
+          //   <Text
+          //     as="span"
+          //     fontWeight="bold"
+          //     css={{ textTransform: 'capitalize' }}
+          //   >
+          //     {drink.strDrink}
+          //   </Text>
+          //   <Box as="ul" fontSize={2}>
+          //     {drink.ingredients.map(ing => (
+          //       <Text
+          //         as="li"
+          //         key={`${drink.idDrink}-ing-${ing}`}
+          //         color={drink.missing.includes(ing) ? 'red' : 'currentColor'}
+          //       >
+          //         {ing[0].toUpperCase() + ing.slice(1)}
+          //       </Text>
+          //     ))}
+          //   </Box>
+          // </Text>
         ))}
     </Box>
   </Fragment>
