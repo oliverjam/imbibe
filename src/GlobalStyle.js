@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    --hue: 200;
+  }
   * {
     box-sizing: border-box;
     margin: 0;
@@ -11,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: hsl(200, 10%, 25%);
-    background-color: hsl(20, 10%, 97%);
+    background-color: hsl(var(--hue), 45%, 65%);
   }
   ul {
     padding: 0;

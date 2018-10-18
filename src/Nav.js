@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from '@reach/router';
-import { Box, Flex } from 'rebass';
 
 const Container = styled.nav`
   position: fixed;
@@ -21,8 +20,6 @@ const NavItem = styled.li`
   display: block;
   height: 100%;
   flex: 1 0 auto;
-  /* display: grid;
-  place-content: center; */
 `;
 
 const NavLink = styled(Link)`
@@ -33,7 +30,7 @@ const NavLink = styled(Link)`
   height: 100%;
   text-align: center;
   color: white;
-  background-color: hsl(200, 10%, 50%);
+  background-color: hsl(var(--hue), 10%, 50%);
   transition: background-color 0.1s;
 
   &:hover {
