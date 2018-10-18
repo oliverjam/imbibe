@@ -7,6 +7,7 @@ import Nav from './Nav';
 import IngredientSearch from './IngredientSearch';
 import IngredientList from './IngredientList';
 import DrinksList from './DrinksList';
+import Drink from './Drink';
 
 class App extends Component {
   componentDidMount() {
@@ -71,6 +72,7 @@ class App extends Component {
               drinks={drinks}
               myIngredients={myIngredients}
             />
+            <Drink path="/drink/:drinkId" drinks={drinks} />
           </Router>
         </Box>
       </Fragment>
