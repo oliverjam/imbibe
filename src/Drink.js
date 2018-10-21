@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const border = `0.25rem solid hsl(20, 10%, 10%)`;
+const border = `0.25rem solid hsl(var(--hue), 50%, 10%)`;
 
 const Container = styled.div`
   display: grid;
@@ -26,7 +26,7 @@ const Title = styled.h3`
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 900;
-  z-index: 10;
+  /* z-index: 10; */
   @media (min-width: 40em) {
     grid-row: 1 / 1;
     grid-column: 1 / 1;
@@ -34,7 +34,7 @@ const Title = styled.h3`
 `;
 
 const Ingredients = styled.ul`
-  grid-column: 1 / 3;
+  grid-column: 1 / -1;
   @media (min-width: 40em) {
     grid-row: 2 / 4;
     grid-column: 1 / 1;
@@ -60,16 +60,14 @@ const Instructions = styled.p`
 `;
 
 const ImageContainer = styled.div`
-  grid-row: 3;
-  grid-column: 1 / 2;
-  border-top: ${border};
-  border-right: ${border};
-  background-color: white;
+  display: none;
   @media (min-width: 40em) {
+    display: block;
     grid-row: 3 / 6;
     grid-column: 2 / 2;
+    border-top: ${border};
     border-left: ${border};
-    border-right: none;
+    background-color: white;
   }
 `;
 
@@ -81,14 +79,16 @@ const Image = styled.img`
 `;
 
 const Glass = styled.div`
-  grid-row: 2;
-  grid-column: 3;
+  grid-row: 3;
+  grid-column: 1;
   border-top: ${border};
-  border-left: ${border};
+  border-right: ${border};
   @media (min-width: 40em) {
     grid-row: 1 / 3;
     grid-column: 2 / 2;
     border-top: none;
+    border-right: none;
+    border-left: ${border};
   }
 `;
 
