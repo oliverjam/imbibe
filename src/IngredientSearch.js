@@ -20,11 +20,11 @@ const hideVisually = css`
 const Container = styled.div`
   position: relative;
   padding: 1rem;
-  background-color: hsl(200, 20%, 25%);
+  background-color: hsl(var(--hue), 20%, 25%);
   color: white;
 `;
 
-const shadow = '0 2px 4px hsla(200, 20%, 25%, 0.8)';
+const shadow = '0 2px 4px hsla(var(--hue), 20%, 25%, 0.8)';
 
 const Label = styled.label`
   ${hideVisually};
@@ -33,8 +33,9 @@ const Label = styled.label`
 const SearchInput = styled.input.attrs({ type: 'text' })`
   width: 100%;
   margin-top: 0.25rem;
+  border: 0.25rem solid hsl(var(--hue), 50%, 10%);
   padding: 0.5rem 1rem;
-  background-color: hsl(200, 15%, 40%);
+  background-color: hsl(var(--hue), 15%, 40%);
   &:focus {
     box-shadow: ${shadow};
   }
@@ -47,11 +48,22 @@ const SearchInput = styled.input.attrs({ type: 'text' })`
 const SearchResults = styled.ul`
   position: absolute;
   top: calc(100% - 0.5rem);
-  font-size: 14px;
+  /* font-size: 14px; */
   background-color: white;
-  color: hsl(200, 10%, 20%);
+  color: hsl(var(--hue), 10%, 20%);
   box-shadow: ${shadow};
+  border: 0.25rem solid hsl(var(--hue), 50%, 10%);
   cursor: pointer;
+`;
+
+const Result = styled.li`
+  padding: 0.5rem 1rem;
+  text-transform: capitalize;
+  ${props =>
+    props.highlighted && 'background-color: hsl(var(--hue), 10%, 90%)'};
+  &:hover {
+    background-color: hsl(var(--hue), 10%, 90%);
+  }
 `;
 
 const IngredientSearch = ({ selectIngredient, ingredients }) => (
@@ -76,20 +88,13 @@ const IngredientSearch = ({ selectIngredient, ingredients }) => (
           {isOpen && (
             <SearchResults {...getMenuProps()}>
               {matchSorter(ingredients, inputValue).map((ingredient, i) => (
-                <Text
+                <Result
                   {...getItemProps({ item: ingredient })}
-                  as="li"
                   key={`searchIng- ${ingredient}`}
-                  px={3}
-                  py={2}
-                  bg={
-                    highlightedIndex === i
-                      ? 'hsl(200, 10%, 90%)'
-                      : 'transparent'
-                  }
+                  highlighted={highlightedIndex === i}
                 >
                   {ingredient}
-                </Text>
+                </Result>
               ))}
             </SearchResults>
           )}

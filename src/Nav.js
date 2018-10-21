@@ -34,13 +34,13 @@ const NavLink = styled(Link)`
   transition: background-color 0.1s;
 
   &:hover {
-    background-color: hsl(200, 15%, 40%);
+    background-color: hsl(var(--hue), 15%, 40%);
   }
 
   &[aria-current='page'] {
-    background-color: hsl(200, 20%, 30%);
+    background-color: hsl(var(--hue), 20%, 30%);
     &:hover {
-      background-color: hsl(200, 20%, 30%);
+      background-color: hsl(var(--hue), 20%, 30%);
     }
   }
 `;
