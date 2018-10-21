@@ -96,14 +96,9 @@ const upperCase = str => str[0].toUpperCase() + str.slice(1);
 
 const Drink = ({ drinkId, drinks }) => {
   const hue = (360 / 6) * (drinkId % 6);
-  const {
-    ingredients,
-    measures,
-    strDrink: name,
-    strGlass,
-    strInstructions,
-    strDrinkThumb,
-  } = drinks.find(drink => drink.idDrink === drinkId);
+  const { ingredients, measures, name, glass, method, image } = drinks.find(
+    drink => drink.id === drinkId
+  );
 
   return (
     <Container>
@@ -117,11 +112,11 @@ const Drink = ({ drinkId, drinks }) => {
           </Step>
         ))}
       </Ingredients>
-      <Instructions>{strInstructions}</Instructions>
+      <Instructions>{method}</Instructions>
       <ImageContainer>
-        <Image src={strDrinkThumb} />
+        <Image src={image} />
       </ImageContainer>
-      <Glass>{strGlass}</Glass>
+      <Glass>{glass}</Glass>
     </Container>
   );
 };

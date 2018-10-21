@@ -16,7 +16,7 @@ const DrinksList = ({ drinks, myIngredients }) => (
           return [...acc, { ...drink, missing }];
         }, [])
         .map(drink => (
-          <DrinkLink key={drink.idDrink} {...drink} />
+          <DrinkLink key={drink.id} {...drink} />
         ))}
     </Box>
   </Fragment>

@@ -38,10 +38,10 @@ const Title = styled.h4`
 
 const upperCase = str => str[0].toUpperCase() + str.slice(1);
 
-const Drink = ({ idDrink, ingredients, strDrink: name, strDrinkThumb }) => {
+const Drink = ({ id, ingredients, name, image }) => {
   return (
-    <Container to={`/drink/${idDrink}`}>
-      <Image src={strDrinkThumb} aria-hidden="true" />
+    <Container to={`/drink/${id}`}>
+      <Image src={image} aria-hidden="true" />
       <Content>
         <Title>{name}</Title>
         <Flex as="span" fontSize={2}>
