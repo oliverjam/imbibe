@@ -9,8 +9,8 @@
     "@reach/router": "^1.2.1",
     "downshift": "^2.2.3",
     "match-sorter": "^2.3.0",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
+    "react": "^16.7.0-alpha.0",
+    "react-dom": "^16.7.0-alpha.0",
     "rebass": "^3.0.0-9",
     "styled-components": "^4.0.0-beta.10"
   },

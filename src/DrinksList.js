@@ -2,8 +2,9 @@ import React, { Fragment } from 'react';
 
 import DrinkLink from './DrinkLink';
 import { Box, Heading } from 'rebass';
+import drinks from './data/drinks';
 
-const DrinksList = ({ drinks, myIngredients }) => (
+const DrinksList = ({ myIngredients }) => (
   <Fragment>
     <Heading as="h3">Drinks</Heading>
     <Box as="ul">
