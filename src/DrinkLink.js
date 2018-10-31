@@ -36,25 +36,32 @@ const Title = styled.h4`
   z-index: 10;
 `;
 
-const upperCase = str => str[0].toUpperCase() + str.slice(1);
+const Ing = styled.li`
+  display: inline;
+  font-size: 0.875rem;
+  text-decoration: ${p => (p.strike ? 'line-through' : 'none')};
+  &:not(:first-child) {
+    margin-left: 0.5ch;
+  }
+  &:not(:last-child)::after {
+    content: ',';
+  }
+`;
 
-const Drink = ({ id, ingredients, name, image }) => {
+const capitalise = str => str[0].toUpperCase() + str.slice(1);
+
+const Drink = ({ id, ingredients, name, image, missing }) => {
+  console.log(missing);
   return (
     <Container to={`/drink/${id}`}>
-      <Image src={image} aria-hidden="true" />
+      {/* <Image src={image} aria-hidden="true" /> */}
       <Content>
         <Title>{name}</Title>
-        <Flex as="span" fontSize={2}>
-          {ingredients
-            .slice(0, 3)
-            .reduce(
-              (str, ing, i, arr) =>
-                str +
-                upperCase(ing) +
-                (ing === arr[arr.length - 1] ? '' : ', '),
-              ''
-            )}
-        </Flex>
+        <ul>
+          {ingredients.slice(0, 3).map(ing => (
+            <Ing strike={missing.includes(ing)}>{capitalise(ing)}</Ing>
+          ))}
+        </ul>
       </Content>
     </Container>
   );
