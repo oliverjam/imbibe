@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { Flex, Box, Heading, Text, Button } from 'rebass';
 
 const IngredientList = ({
-  ingredients,
   myIngredients,
   selectIngredient,
   removeIngredient,

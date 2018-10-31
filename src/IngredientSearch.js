@@ -2,7 +2,7 @@ import React from 'react';
 import Downshift from 'downshift';
 import matchSorter from 'match-sorter';
 import styled, { css } from 'styled-components';
-import { Text } from 'rebass';
+import ingredients from './data/ingredients';
 
 const hideVisually = css`
   border: 0;
@@ -66,7 +66,7 @@ const Result = styled.li`
   }
 `;
 
-const IngredientSearch = ({ selectIngredient, ingredients }) => (
+const IngredientSearch = ({ selectIngredient }) => (
   <Downshift onSelect={selectIngredient}>
     {({
       getInputProps,

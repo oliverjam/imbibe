@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, Suspense, lazy } from 'react';
 import { Router } from '@reach/router';
 import { Box } from 'rebass';
 
@@ -6,21 +6,12 @@ import GlobalStyle from './GlobalStyle';
 import Nav from './Nav';
 import IngredientSearch from './IngredientSearch';
 import IngredientList from './IngredientList';
-import DrinksList from './DrinksList';
-import Drink from './Drink';
+
+const DrinksList = lazy(() => import('./DrinksList'));
+const Drink = lazy(() => import('./Drink'));
 
 class App extends Component {
-  componentDidMount() {
-    import('./data/drinks').then(drinks =>
-      this.setState({ drinks: drinks.default })
-    );
-    import('./data/ingredients').then(ingredients =>
-      this.setState({ ingredients: ingredients.default })
-    );
-  }
   state = {
-    drinks: [],
-    ingredients: [],
     myIngredients: [
       'light rum',
       'ginger beer',
@@ -48,32 +39,25 @@ class App extends Component {
       myIngredients: myIngredients.filter(x => x !== ing),
     }));
   render() {
-    const { drinks, ingredients, myIngredients } = this.state;
-    if (!drinks.length || !ingredients.length) return null;
+    const { myIngredients } = this.state;
     return (
       <Fragment>
         <GlobalStyle />
         <Nav />
-        <IngredientSearch
-          ingredients={ingredients}
-          selectIngredient={this.selectIngredient}
-        />
+        <IngredientSearch selectIngredient={this.selectIngredient} />
         <Box p={3} mx="auto" css={{ maxWidth: '30rem' }}>
-          <Router>
-            <IngredientList
-              path="/"
-              ingredients={ingredients}
-              myIngredients={myIngredients}
-              selectIngredient={this.selectIngredient}
-              removeIngredient={this.removeIngredient}
-            />
-            <DrinksList
-              path="/drinks"
-              drinks={drinks}
-              myIngredients={myIngredients}
-            />
-            <Drink path="/drink/:drinkId" drinks={drinks} />
-          </Router>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Router>
+              <IngredientList
+                path="/"
+                myIngredients={myIngredients}
+                selectIngredient={this.selectIngredient}
+                removeIngredient={this.removeIngredient}
+              />
+              <DrinksList path="/drinks" myIngredients={myIngredients} />
+              <Drink path="/drink/:drinkId" />
+            </Router>
+          </Suspense>
         </Box>
       </Fragment>
     );

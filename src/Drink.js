@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import drinks from './data/drinks';
 
 const border = `0.25rem solid hsl(var(--hue), 50%, 10%)`;
 
@@ -93,8 +94,7 @@ const Glass = styled.div`
 `;
 
 const upperCase = str => str[0].toUpperCase() + str.slice(1);
-
-const Drink = ({ drinkId, drinks }) => {
+const Drink = ({ drinkId }) => {
   const hue = (360 / 6) * (drinkId % 6);
   const { ingredients, measures, name, glass, method, image } = drinks.find(
     drink => drink.id === drinkId
