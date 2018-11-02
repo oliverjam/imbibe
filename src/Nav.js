@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from '@reach/router';
+import { Bottle, MartiniGlass } from './icons';
+import { VisuallyHidden } from './css';
 
 const Container = styled.nav`
   position: fixed;
-  height: 2.5rem;
+  height: 2.75rem;
   bottom: 0;
   left: 0;
   right: 0;
@@ -49,10 +51,16 @@ const Nav = () => (
   <Container>
     <NavList>
       <NavItem>
-        <NavLink to="/">Ingredients</NavLink>
+        <NavLink to="/">
+          <Bottle size="2em" />
+          <VisuallyHidden>Ingredients</VisuallyHidden>
+        </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink to="/drinks">Drinks</NavLink>
+        <NavLink to="/drinks">
+          <MartiniGlass size="2em" />
+          <VisuallyHidden>Drinks</VisuallyHidden>
+        </NavLink>
       </NavItem>
     </NavList>
   </Container>
