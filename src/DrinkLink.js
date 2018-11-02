@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from '@reach/router';
-import { Flex } from 'rebass';
 
 const Container = styled(Link)`
   display: flex;
@@ -51,7 +50,6 @@ const Ing = styled.li`
 const capitalise = str => str[0].toUpperCase() + str.slice(1);
 
 const Drink = ({ id, ingredients, name, image, missing }) => {
-  console.log(missing);
   return (
     <Container to={`/drink/${id}`}>
       {/* <Image src={image} aria-hidden="true" /> */}

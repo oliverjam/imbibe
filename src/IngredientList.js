@@ -1,5 +1,19 @@
 import React, { Fragment } from 'react';
-import { Flex, Box, Heading, Text, Button } from 'rebass';
+import styled from 'styled-components';
+
+const Ing = styled.li`
+  display: flex;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  min-height: 2.75rem;
+  margin-left: 0.5rem;
+  border: none;
+  padding: 0;
+  background: none;
+  font-size: 1.5rem;
+`;
 
 const IngredientList = ({
   myIngredients,
@@ -7,26 +21,15 @@ const IngredientList = ({
   removeIngredient,
 }) => (
   <Fragment>
-    <Heading as="h3" mt={3}>
-      My Ingredients
-    </Heading>
-    <Box as="ul" mt={2}>
+    <h3>My Ingredients</h3>
+    <ul>
       {myIngredients.map(ing => (
-        <Flex as="li" key={`myIng-${ing}`} alignItems="center">
-          <Text as="span">{ing[0].toUpperCase() + ing.slice(1)}</Text>
-          <Button
-            onClick={removeIngredient(ing)}
-            ml={1}
-            bg="transparent"
-            color="hsl(200, 10%, 70%)"
-            px={1}
-            py={1}
-          >
-            &times;
-          </Button>
-        </Flex>
+        <Ing>
+          <span>{ing[0].toUpperCase() + ing.slice(1)}</span>
+          <Button onClick={removeIngredient(ing)}>&times;</Button>
+        </Ing>
       ))}
-    </Box>
+    </ul>
   </Fragment>
 );
 

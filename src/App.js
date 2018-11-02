@@ -1,6 +1,6 @@
 import React, { Fragment, Suspense, lazy, useState } from 'react';
 import { Router } from '@reach/router';
-import { Box } from 'rebass';
+import styled from 'styled-components';
 
 import GlobalStyle from './GlobalStyle';
 import Nav from './Nav';
@@ -10,8 +10,30 @@ import IngredientList from './IngredientList';
 const DrinksList = lazy(() => import('./DrinksList'));
 const Drink = lazy(() => import('./Drink'));
 
+const Container = styled.div`
+  max-width: 30rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+`;
+
 function App() {
-  const [myIngredients, setIngredients] = useState([]);
+  const [myIngredients, setIngredients] = useState([
+    'light rum',
+    'ginger beer',
+    'lemon peel',
+    'añejo rum',
+    'orange juice',
+    'lemon juice',
+    'ginger ale',
+    'applejack',
+    'grapefruit juice',
+    'gin',
+    'orange bitters',
+    'orange',
+    'cherry',
+    'dark rum',
+    'peach nectar',
+  ]);
   const selectIngredient = (newIng, { reset }) => {
     setIngredients([...myIngredients, newIng]);
     reset({ inputValue: '' });
@@ -24,7 +46,7 @@ function App() {
       <GlobalStyle />
       <Nav />
       <IngredientSearch selectIngredient={selectIngredient} />
-      <Box p={3} mx="auto" css={{ maxWidth: '30rem' }}>
+      <Container>
         <Suspense fallback={<div>Loading...</div>}>
           <Router>
             <IngredientList
@@ -37,7 +59,7 @@ function App() {
             <Drink path="/drink/:drinkId" />
           </Router>
         </Suspense>
-      </Box>
+      </Container>
     </Fragment>
   );
 }
