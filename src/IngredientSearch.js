@@ -3,26 +3,7 @@ import Downshift from 'downshift';
 import matchSorter from 'match-sorter';
 import styled, { css } from 'styled-components';
 import ingredients from './data/ingredients';
-
-const hideVisually = css`
-  border: 0;
-  clip: rect(0 0 0 0);
-  clippath: inset(50%);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  whitespace: nowrap;
-  width: 1px;
-`;
-
-const Container = styled.div`
-  position: relative;
-  padding: 1rem;
-  background-color: hsl(var(--hue), 20%, 25%);
-  color: white;
-`;
+import { BorderBox, IconButton, hideVisually } from './css';
 
 const shadow = '0 2px 4px hsla(var(--hue), 20%, 25%, 0.8)';
 
@@ -30,39 +11,56 @@ const Label = styled.label`
   ${hideVisually};
 `;
 
-const SearchInput = styled.input.attrs({ type: 'text' })`
+const SearchInput = styled.input`
   width: 100%;
-  margin-top: 0.25rem;
-  border: 0.25rem solid hsl(var(--hue), 50%, 10%);
   padding: 0.5rem 1rem;
-  background-color: hsl(var(--hue), 15%, 40%);
+  background-color: #fff;
+  transition: background-color 0.2s, color 0.2s;
   &:focus {
-    box-shadow: ${shadow};
+    background-color: hsl(var(--hue), 50%, 30%);
+    color: #fff;
   }
   &::placeholder {
     font-weight: 600;
-    color: white;
+    color: inherit;
+    opacity: 1;
   }
 `;
 
 const SearchResults = styled.ul`
+  max-height: 60vh;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   position: absolute;
-  top: calc(100% - 0.5rem);
-  /* font-size: 14px; */
+  top: calc(100% + 0.5rem);
+  left: 0;
   background-color: white;
   color: hsl(var(--hue), 10%, 20%);
-  box-shadow: ${shadow};
   border: 0.25rem solid hsl(var(--hue), 50%, 10%);
   cursor: pointer;
+`;
+
+const highlight = css`
+  border-color: hsl(var(--hue), 50%, 10%);
+  background-color: hsl(var(--hue), 50%, 30%);
+  color: #fff;
 `;
 
 const Result = styled.li`
   padding: 0.5rem 1rem;
   text-transform: capitalize;
-  ${props =>
-    props.highlighted && 'background-color: hsl(var(--hue), 10%, 90%)'};
+  border-color: transparent;
+  &:not(:first-child) {
+    border-top-width: 0.25rem;
+    border-top-style: solid;
+  }
+  &:not(:last-child) {
+    border-bottom-width: 0.25rem;
+    border-bottom-style: solid;
+  }
+  ${props => props.highlighted && highlight};
   &:hover {
-    background-color: hsl(var(--hue), 10%, 90%);
+    ${highlight};
   }
 `;
 
@@ -72,25 +70,27 @@ const IngredientSearch = ({ selectIngredient }) => (
       getInputProps,
       getMenuProps,
       getItemProps,
+      getToggleButtonProps,
       isOpen,
       inputValue,
       highlightedIndex,
     }) => (
-      <div style={{ position: 'relative' }}>
-        <Container>
-          <Label htmlFor="ingredient-search">Add ingredients</Label>
+      <div style={{ position: 'relative', marginTop: '1rem' }}>
+        <BorderBox>
+          <Label htmlFor="ingredient-search">Add ingredient</Label>
           <SearchInput
             {...getInputProps({
               id: 'ingredient-search',
-              placeholder: 'Add ingredients',
+              placeholder: '🔍 Add ingredient',
             })}
           />
+          <IconButton {...getToggleButtonProps()}>&#43;</IconButton>
           {isOpen && (
             <SearchResults {...getMenuProps()}>
               {matchSorter(ingredients, inputValue).map((ingredient, i) => (
                 <Result
                   {...getItemProps({ item: ingredient })}
-                  key={`searchIng- ${ingredient}`}
+                  key={`searchIng-${ingredient}`}
                   highlighted={highlightedIndex === i}
                 >
                   {ingredient}
@@ -98,7 +98,7 @@ const IngredientSearch = ({ selectIngredient }) => (
               ))}
             </SearchResults>
           )}
-        </Container>
+        </BorderBox>
       </div>
     )}
   </Downshift>
