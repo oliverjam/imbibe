@@ -53,13 +53,13 @@ const Nav = () => (
       <NavItem>
         <NavLink to="/">
           <Bottle size="2em" />
-          <VisuallyHidden>Ingredients</VisuallyHidden>
+          <VisuallyHidden mq="30em">Ingredients</VisuallyHidden>
         </NavLink>
       </NavItem>
       <NavItem>
         <NavLink to="/drinks">
           <MartiniGlass size="2em" />
-          <VisuallyHidden>Drinks</VisuallyHidden>
+          <VisuallyHidden mq="30em">Drinks</VisuallyHidden>
         </NavLink>
       </NavItem>
     </NavList>

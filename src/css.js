@@ -11,6 +11,7 @@ export const IconButton = styled.button`
   color: #fff;
   font-size: 1.5rem;
   font-weight: 900;
+  cursor: pointer;
 `;
 
 export const border = '0.25rem solid hsl(var(--hue), 50%, 10%)';
@@ -21,16 +22,18 @@ export const BorderBox = styled.div`
 `;
 
 export const hideVisually = css`
-  border: 0;
-  clip: rect(0 0 0 0);
-  clippath: inset(50%);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  whitespace: nowrap;
-  width: 1px;
+  @media (max-width: ${p => p.mq || '1000em'}) {
+    border: 0;
+    clip: rect(0 0 0 0);
+    clippath: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    whitespace: nowrap;
+    width: 1px;
+  }
 `;
 
 export const VisuallyHidden = styled.span({}, hideVisually);
