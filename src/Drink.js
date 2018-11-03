@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import { HueContext } from './HueProvider';
 import drinks from './data/drinks';
 
 const border = `0.25rem solid hsl(var(--hue), 50%, 10%)`;
@@ -20,13 +21,14 @@ const Container = styled.div`
   }
 `;
 
-const Title = styled.h3`
+const Title = styled.h1`
   padding: 0.5rem;
   background-color: white;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 900;
+  font-size: 1.25rem;
   /* z-index: 10; */
   @media (min-width: 40em) {
     grid-row: 1 / 1;
@@ -96,13 +98,20 @@ const Glass = styled.div`
 const upperCase = str => str[0].toUpperCase() + str.slice(1);
 const Drink = ({ drinkId }) => {
   const hue = (360 / 6) * (drinkId % 6);
+  const { setHue } = useContext(HueContext);
+  useEffect(
+    () => {
+      setHue(hue);
+    },
+    [drinkId]
+  );
+
   const { ingredients, measures, name, glass, method, image } = drinks.find(
     drink => drink.id === drinkId
   );
 
   return (
     <Container>
-      <style>{`:root { --hue: ${hue} }`}</style>
       <Title>{name}</Title>
       <Ingredients>
         {measures.map((measure, i) => (
