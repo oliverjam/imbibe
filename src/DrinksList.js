@@ -2,10 +2,14 @@ import React, { Fragment } from 'react';
 
 import DrinkLink from './DrinkLink';
 import drinks from './data/drinks';
+import { MartiniGlass } from './icons';
 
 const DrinksList = ({ myIngredients }) => (
   <Fragment>
-    <h3>Drinks</h3>
+    <h1>
+      <MartiniGlass size="2em" />
+      My Drinks
+    </h1>
     <ul>
       {drinks
         .reduce((acc, drink) => {
