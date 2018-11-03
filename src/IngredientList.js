@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
+import posed, { PoseGroup } from 'react-pose';
 import IngredientSearch from './IngredientSearch';
 import { PageContainer, Header } from './css';
 import { Bottle } from './icons';
@@ -14,7 +15,9 @@ const List = styled.ul`
   /* grid-row-gap: 1rem; */
 `;
 
-const Ing = styled.li`
+const AnimatedLi = posed.li();
+
+const Ing = styled(AnimatedLi)`
   margin-top: 1rem;
   margin-left: 1rem;
   display: flex;
@@ -57,17 +60,19 @@ const IngredientList = ({
     <PageContainer>
       <IngredientSearch selectIngredient={selectIngredient} />
       <List>
-        {myIngredients.map(ing => (
-          <Ing key={`myIng-${ing}`}>
-            <Content>{ing[0].toUpperCase() + ing.slice(1)}</Content>
-            <Button
-              onClick={removeIngredient(ing)}
-              aria-label={`Remove ${ing}`}
-            >
-              &times;
-            </Button>
-          </Ing>
-        ))}
+        <PoseGroup>
+          {myIngredients.map(ing => (
+            <Ing key={`myIng-${ing}`}>
+              <Content>{ing[0].toUpperCase() + ing.slice(1)}</Content>
+              <Button
+                onClick={removeIngredient(ing)}
+                aria-label={`Remove ${ing}`}
+              >
+                &times;
+              </Button>
+            </Ing>
+          ))}
+        </PoseGroup>
       </List>
     </PageContainer>
   </Fragment>

@@ -12,6 +12,7 @@
     "match-sorter": "^2.3.0",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
+    "react-pose": "^3.4.0",
     "styled-components": "^4.0.0-beta.10"
   },
   "scripts": {
