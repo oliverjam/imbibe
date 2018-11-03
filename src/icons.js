@@ -49,3 +49,25 @@ export const Bottle = ({
     <rect width="12" height="7" x="10" y="16" />
   </Svg>
 );
+
+export const Search = ({
+  size = '1.5em',
+  fill = 'none',
+  stroke = 'currentColor',
+  ...props
+}) => (
+  <Svg
+    width={size}
+    height={size}
+    viewBox="0 0 32 32"
+    fill={fill}
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinejoin="round"
+    strokeLinecap="round"
+    {...props}
+  >
+    <circle r="8" cx="12" cy="12" />
+    <path d="M 18 18 l 8 8" />
+  </Svg>
+);

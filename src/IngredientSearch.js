@@ -4,16 +4,33 @@ import matchSorter from 'match-sorter';
 import styled, { css } from 'styled-components';
 import ingredients from './data/ingredients';
 import { BorderBox, IconButton, hideVisually } from './css';
-
-const shadow = '0 2px 4px hsla(var(--hue), 20%, 25%, 0.8)';
+import { Search as SearchIcon } from './icons';
 
 const Label = styled.label`
   ${hideVisually};
 `;
 
+const SearchWrapper = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  &:focus-within {
+    color: #fff;
+  }
+  & > svg {
+    grid-column: 1 / 2;
+    grid-row: 1;
+    margin-left: 1rem;
+    z-index: 10;
+    align-self: center;
+    transition: color 0.2s;
+  }
+`;
+
 const SearchInput = styled.input`
+  grid-column: 1 / -1;
+  grid-row: 1;
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 2.75rem;
   background-color: #fff;
   transition: background-color 0.2s, color 0.2s;
   &:focus {
@@ -78,12 +95,15 @@ const IngredientSearch = ({ selectIngredient }) => (
       <div style={{ position: 'relative', marginTop: '1rem' }}>
         <BorderBox>
           <Label htmlFor="ingredient-search">Add ingredient</Label>
-          <SearchInput
-            {...getInputProps({
-              id: 'ingredient-search',
-              placeholder: '🔍 Add ingredient',
-            })}
-          />
+          <SearchWrapper>
+            <SearchIcon />
+            <SearchInput
+              {...getInputProps({
+                id: 'ingredient-search',
+                placeholder: 'Add ingredient',
+              })}
+            />
+          </SearchWrapper>
           <IconButton {...getToggleButtonProps()}>&#43;</IconButton>
           {isOpen && (
             <SearchResults {...getMenuProps()}>
