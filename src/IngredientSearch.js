@@ -13,6 +13,7 @@ const Label = styled.label`
 const SearchWrapper = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
+  flex: 1;
   &:focus-within {
     color: #fff;
   }
