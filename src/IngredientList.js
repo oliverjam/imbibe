@@ -6,12 +6,17 @@ import { Bottle } from './icons';
 
 const List = styled.ul`
   margin-top: 1rem;
-  display: grid;
-  justify-items: start;
-  grid-row-gap: 1rem;
+  margin-left: -1rem;
+  /* display: grid; */
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-items: start; */
+  /* grid-row-gap: 1rem; */
 `;
 
 const Ing = styled.li`
+  margin-top: 1rem;
+  margin-left: 1rem;
   display: flex;
   border: 0.25rem solid hsl(var(--hue), 50%, 10%);
   font-weight: 600;

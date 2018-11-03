@@ -36,7 +36,7 @@ export const hideVisually = css`
 export const VisuallyHidden = styled.span({}, hideVisually);
 
 export const PageContainer = styled.div`
-  max-width: 30rem;
+  max-width: 38rem;
   margin: 0 auto;
   padding: 1.5rem 1.5rem 3.75rem 1.5rem;
 `;
