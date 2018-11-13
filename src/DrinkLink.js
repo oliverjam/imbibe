@@ -3,6 +3,25 @@ import styled from 'styled-components';
 import { Link } from '@reach/router';
 import { BorderBox, border } from './css';
 
+const capitalise = str => str[0].toUpperCase() + str.slice(1);
+
+const Drink = ({ id, ingredients, name, image, missing }) => {
+  return (
+    <BorderBox as={Link} to={`/drink/${id}`}>
+      <Content>
+        <Title>{name}</Title>
+        <List>
+          {ingredients.slice(0, 3).map(ing => (
+            <Ing key={`drinkIng-${ing}`} strike={missing.includes(ing)}>
+              {capitalise(ing)}
+            </Ing>
+          ))}
+        </List>
+      </Content>
+    </BorderBox>
+  );
+};
+
 const Content = styled.div`
   /* padding: 1rem; */
   flex: 1;
@@ -33,24 +52,5 @@ const Ing = styled.li`
     content: ',';
   }
 `;
-
-const capitalise = str => str[0].toUpperCase() + str.slice(1);
-
-const Drink = ({ id, ingredients, name, image, missing }) => {
-  return (
-    <BorderBox as={Link} to={`/drink/${id}`}>
-      <Content>
-        <Title>{name}</Title>
-        <List>
-          {ingredients.slice(0, 3).map(ing => (
-            <Ing key={`drinkIng-${ing}`} strike={missing.includes(ing)}>
-              {capitalise(ing)}
-            </Ing>
-          ))}
-        </List>
-      </Content>
-    </BorderBox>
-  );
-};
 
 export default Drink;
