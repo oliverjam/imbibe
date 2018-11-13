@@ -6,6 +6,49 @@ import ingredients from './data/ingredients';
 import { BorderBox, IconButton, hideVisually } from './css';
 import { Search as SearchIcon } from './icons';
 
+const IngredientSearch = ({ selectIngredient }) => (
+  <Downshift onSelect={selectIngredient}>
+    {({
+      getInputProps,
+      getMenuProps,
+      getItemProps,
+      getToggleButtonProps,
+      isOpen,
+      inputValue,
+      highlightedIndex,
+    }) => (
+      <div style={{ position: 'relative', marginTop: '1rem' }}>
+        <BorderBox>
+          <Label htmlFor="ingredient-search">Add ingredient</Label>
+          <SearchWrapper>
+            <SearchIcon />
+            <SearchInput
+              {...getInputProps({
+                id: 'ingredient-search',
+                placeholder: 'Add ingredient',
+              })}
+            />
+          </SearchWrapper>
+          <IconButton {...getToggleButtonProps()}>&#43;</IconButton>
+          {isOpen && (
+            <SearchResults {...getMenuProps()}>
+              {matchSorter(ingredients, inputValue).map((ingredient, i) => (
+                <Result
+                  {...getItemProps({ item: ingredient })}
+                  key={`searchIng-${ingredient}`}
+                  highlighted={highlightedIndex === i}
+                >
+                  {ingredient}
+                </Result>
+              ))}
+            </SearchResults>
+          )}
+        </BorderBox>
+      </div>
+    )}
+  </Downshift>
+);
+
 const Label = styled.label`
   ${hideVisually};
 `;
@@ -81,48 +124,5 @@ const Result = styled.li`
     ${highlight};
   }
 `;
-
-const IngredientSearch = ({ selectIngredient }) => (
-  <Downshift onSelect={selectIngredient}>
-    {({
-      getInputProps,
-      getMenuProps,
-      getItemProps,
-      getToggleButtonProps,
-      isOpen,
-      inputValue,
-      highlightedIndex,
-    }) => (
-      <div style={{ position: 'relative', marginTop: '1rem' }}>
-        <BorderBox>
-          <Label htmlFor="ingredient-search">Add ingredient</Label>
-          <SearchWrapper>
-            <SearchIcon />
-            <SearchInput
-              {...getInputProps({
-                id: 'ingredient-search',
-                placeholder: 'Add ingredient',
-              })}
-            />
-          </SearchWrapper>
-          <IconButton {...getToggleButtonProps()}>&#43;</IconButton>
-          {isOpen && (
-            <SearchResults {...getMenuProps()}>
-              {matchSorter(ingredients, inputValue).map((ingredient, i) => (
-                <Result
-                  {...getItemProps({ item: ingredient })}
-                  key={`searchIng-${ingredient}`}
-                  highlighted={highlightedIndex === i}
-                >
-                  {ingredient}
-                </Result>
-              ))}
-            </SearchResults>
-          )}
-        </BorderBox>
-      </div>
-    )}
-  </Downshift>
-);
 
 export default IngredientSearch;

@@ -5,12 +5,6 @@ import DrinkLink from './DrinkLink';
 import drinks from './data/drinks';
 import { MartiniGlass } from './icons';
 
-const List = styled.ul`
-  display: grid;
-  grid-row-gap: 1rem;
-  margin-top: 2rem;
-`;
-
 const DrinksList = ({ myIngredients }) => (
   <Fragment>
     <h1>
@@ -31,5 +25,11 @@ const DrinksList = ({ myIngredients }) => (
     </List>
   </Fragment>
 );
+
+const List = styled.ul`
+  display: grid;
+  grid-row-gap: 1rem;
+  margin-top: 2rem;
+`;
 
 export default DrinksList;

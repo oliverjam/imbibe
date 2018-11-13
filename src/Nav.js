@@ -4,6 +4,25 @@ import { Link } from '@reach/router';
 import { Bottle, MartiniGlass } from './icons';
 import { VisuallyHidden } from './css';
 
+const Nav = () => (
+  <Container>
+    <NavList>
+      <NavItem>
+        <NavLink to="/">
+          <Bottle size="2em" />
+          <VisuallyHidden mq="30em">Ingredients</VisuallyHidden>
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink to="/drinks">
+          <MartiniGlass size="2em" />
+          <VisuallyHidden mq="30em">Drinks</VisuallyHidden>
+        </NavLink>
+      </NavItem>
+    </NavList>
+  </Container>
+);
+
 const Container = styled.nav`
   position: fixed;
   height: 2.75rem;
@@ -46,24 +65,5 @@ const NavLink = styled(Link)`
     }
   }
 `;
-
-const Nav = () => (
-  <Container>
-    <NavList>
-      <NavItem>
-        <NavLink to="/">
-          <Bottle size="2em" />
-          <VisuallyHidden mq="30em">Ingredients</VisuallyHidden>
-        </NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink to="/drinks">
-          <MartiniGlass size="2em" />
-          <VisuallyHidden mq="30em">Drinks</VisuallyHidden>
-        </NavLink>
-      </NavItem>
-    </NavList>
-  </Container>
-);
 
 export default Nav;
