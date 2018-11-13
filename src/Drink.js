@@ -1,7 +1,44 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { HueContext } from './HueProvider';
 import drinks from './data/drinks';
+
+const upperCase = str => str[0].toUpperCase() + str.slice(1);
+
+const Drink = ({ drinkId }) => {
+  const hue = useMemo(() => (360 / 6) * (drinkId % 6), [drinkId]);
+  const { setHue } = useContext(HueContext);
+  useEffect(
+    () => {
+      setHue(hue);
+    },
+    [drinkId]
+  );
+
+  const { ingredients, measures, name, glass, method, image } = useMemo(
+    () => drinks.find(drink => drink.id === drinkId),
+    [drinkId]
+  );
+
+  return (
+    <Container>
+      <Title>{name}</Title>
+      <Ingredients>
+        {measures.map((measure, i) => (
+          <Step key={measure + ingredients[i]}>
+            <span>{measure}</span>
+            <span>{upperCase(ingredients[i])}</span>
+          </Step>
+        ))}
+      </Ingredients>
+      <Instructions>{method}</Instructions>
+      <ImageContainer>
+        <Image src={image} />
+      </ImageContainer>
+      <Glass>{glass}</Glass>
+    </Container>
+  );
+};
 
 const border = `0.25rem solid hsl(var(--hue), 50%, 10%)`;
 
@@ -94,40 +131,5 @@ const Glass = styled.div`
     border-left: ${border};
   }
 `;
-
-const upperCase = str => str[0].toUpperCase() + str.slice(1);
-const Drink = ({ drinkId }) => {
-  const hue = (360 / 6) * (drinkId % 6);
-  const { setHue } = useContext(HueContext);
-  useEffect(
-    () => {
-      setHue(hue);
-    },
-    [drinkId]
-  );
-
-  const { ingredients, measures, name, glass, method, image } = drinks.find(
-    drink => drink.id === drinkId
-  );
-
-  return (
-    <Container>
-      <Title>{name}</Title>
-      <Ingredients>
-        {measures.map((measure, i) => (
-          <Step key={measure + ingredients[i]}>
-            <span>{measure}</span>
-            <span>{upperCase(ingredients[i])}</span>
-          </Step>
-        ))}
-      </Ingredients>
-      <Instructions>{method}</Instructions>
-      <ImageContainer>
-        <Image src={image} />
-      </ImageContainer>
-      <Glass>{glass}</Glass>
-    </Container>
-  );
-};
 
 export default Drink;
