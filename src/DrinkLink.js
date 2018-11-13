@@ -1,38 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from '@reach/router';
-
-const Container = styled(Link)`
-  display: flex;
-  /* min-height: 4rem; */
-  margin-top: 1rem;
-  border: 2px solid hsl(200, 10%, 10%);
-  background-color: hsl(200, 10%, 30%);
-  /* background-image: linear-gradient(transparent, #000), url('${p => p.img}');
-  background-size: cover; */
-  color: white;
-  /* box-shadow: 0 1px 3px hsla(200, 20%, 20%, 0.5); */
-`;
-
-const Image = styled.img`
-  display: block;
-  height: auto;
-  border-right: 2px solid hsl(200, 10%, 10%);
-  object-fit: cover;
-  flex: 0 1 4rem;
-  &::after {
-    content: '';
-  }
-`;
+import { BorderBox, border } from './css';
 
 const Content = styled.div`
-  padding: 1rem;
+  /* padding: 1rem; */
   flex: 1;
+  background-color: #fff;
 `;
 
 const Title = styled.h4`
+  border-bottom: ${border};
+  padding: 0.5rem 1rem;
+  background-color: hsl(var(--hue), 50%, 30%);
+  color: #fff;
   text-transform: capitalize;
   z-index: 10;
+`;
+
+const List = styled.ul`
+  padding: 0.5rem 1rem;
 `;
 
 const Ing = styled.li`
@@ -51,17 +38,18 @@ const capitalise = str => str[0].toUpperCase() + str.slice(1);
 
 const Drink = ({ id, ingredients, name, image, missing }) => {
   return (
-    <Container to={`/drink/${id}`}>
-      {/* <Image src={image} aria-hidden="true" /> */}
+    <BorderBox as={Link} to={`/drink/${id}`}>
       <Content>
         <Title>{name}</Title>
-        <ul>
+        <List>
           {ingredients.slice(0, 3).map(ing => (
-            <Ing strike={missing.includes(ing)}>{capitalise(ing)}</Ing>
+            <Ing key={`drinkIng-${ing}`} strike={missing.includes(ing)}>
+              {capitalise(ing)}
+            </Ing>
           ))}
-        </ul>
+        </List>
       </Content>
-    </Container>
+    </BorderBox>
   );
 };
 

@@ -33,8 +33,7 @@ const IngredientList = ({
 }) => (
   <Fragment>
     <h1>
-      <Bottle size="2em" />
-      My Ingredients
+      <Bottle /> My Ingredients
     </h1>
     <IngredientSearch selectIngredient={selectIngredient} />
     <List>
