@@ -5,27 +5,6 @@ import IngredientSearch from './IngredientSearch';
 import { BorderBox, IconButton } from './css';
 import { Bottle } from './icons';
 
-const List = styled.ul`
-  margin-top: 1rem;
-  margin-left: -1rem;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const PosedLi = posed.li();
-
-const ListItem = styled(PosedLi)`
-  padding-top: 1rem;
-  padding-left: 1rem;
-`;
-
-const Content = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  background-color: #fff;
-`;
-
 const IngredientList = ({
   myIngredients,
   selectIngredient,
@@ -55,5 +34,26 @@ const IngredientList = ({
     </List>
   </Fragment>
 );
+
+const List = styled.ul`
+  margin-top: 1rem;
+  margin-left: -1rem;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const PosedLi = posed.li();
+
+const ListItem = styled(PosedLi)`
+  padding-top: 1rem;
+  padding-left: 1rem;
+`;
+
+const Content = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+`;
 
 export default IngredientList;

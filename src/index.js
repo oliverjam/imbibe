@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { HueProvider } from './HueProvider';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <HueProvider>
     <App />
-  </HueProvider>
+  </HueProvider>,
+  document.getElementById('root')
 );

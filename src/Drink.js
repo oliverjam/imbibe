@@ -1,44 +1,46 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { HueContext } from './HueProvider';
 import drinks from './data/drinks';
 
 const upperCase = str => str[0].toUpperCase() + str.slice(1);
 
-const Drink = ({ drinkId }) => {
-  const hue = useMemo(() => (360 / 6) * (drinkId % 6), [drinkId]);
-  const { setHue } = useContext(HueContext);
-  useEffect(
-    () => {
-      setHue(hue);
-    },
-    [drinkId]
-  );
+class Drink extends Component {
+  componentDidMount() {
+    const hue = (360 / 6) * (this.props.drinkId % 6);
+    this.props.setHue(hue);
+  }
 
-  const { ingredients, measures, name, glass, method, image } = useMemo(
-    () => drinks.find(drink => drink.id === drinkId),
-    [drinkId]
-  );
+  render() {
+    const { ingredients, measures, name, glass, method, image } = drinks.find(
+      drink => drink.id === this.props.drinkId
+    );
+    return (
+      <Container>
+        <Title>{name}</Title>
+        <Ingredients>
+          {measures.map((measure, i) => (
+            <Step key={measure + ingredients[i]}>
+              <span>{measure}</span>
+              <span>{upperCase(ingredients[i])}</span>
+            </Step>
+          ))}
+        </Ingredients>
+        <Instructions>{method}</Instructions>
+        <ImageContainer>
+          <Image src={image} />
+        </ImageContainer>
+        <Glass>{glass}</Glass>
+      </Container>
+    );
+  }
+}
 
-  return (
-    <Container>
-      <Title>{name}</Title>
-      <Ingredients>
-        {measures.map((measure, i) => (
-          <Step key={measure + ingredients[i]}>
-            <span>{measure}</span>
-            <span>{upperCase(ingredients[i])}</span>
-          </Step>
-        ))}
-      </Ingredients>
-      <Instructions>{method}</Instructions>
-      <ImageContainer>
-        <Image src={image} />
-      </ImageContainer>
-      <Glass>{glass}</Glass>
-    </Container>
-  );
-};
+const DrinkWithContext = props => (
+  <HueContext.Consumer>
+    {({ setHue }) => <Drink {...props} setHue={setHue} />}
+  </HueContext.Consumer>
+);
 
 const border = `0.25rem solid hsl(var(--hue), 50%, 10%)`;
 
@@ -132,4 +134,4 @@ const Glass = styled.div`
   }
 `;
 
-export default Drink;
+export default DrinkWithContext;
