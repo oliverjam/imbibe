@@ -30,6 +30,7 @@ const Drink = ({ drinkId }) => {
           {measures.map((measure, i) => (
             <Step key={measure + ingredients[i]}>
               <span>{measure}</span>
+              <Dots />
               <span>{upperCase(ingredients[i])}</span>
             </Step>
           ))}
@@ -91,7 +92,12 @@ const Ingredients = styled.ul`
 
 const Step = styled.li`
   display: flex;
-  justify-content: space-between;
+`;
+
+const Dots = styled.div.attrs({ 'aria-hidden': true })`
+  flex: 1;
+  margin: 0 0.25rem 0.25rem 0.25rem;
+  border-bottom: 2px dotted;
 `;
 
 const Instructions = styled.p`
