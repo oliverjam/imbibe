@@ -1,18 +1,17 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
-import { HueContext } from './HueProvider';
 import drinks from './data/drinks';
+import { MartiniGlass } from './icons';
 
 const upperCase = str => str[0].toUpperCase() + str.slice(1);
 
 const Drink = ({ drinkId }) => {
   const hue = useMemo(() => (360 / 6) * (drinkId % 6), [drinkId]);
-  const { setHue } = useContext(HueContext);
   useEffect(
     () => {
-      setHue(hue);
+      document.documentElement.style.setProperty('--hue', hue);
     },
-    [drinkId]
+    [hue]
   );
 
   const { ingredients, measures, name, glass, method, image } = useMemo(
@@ -21,22 +20,27 @@ const Drink = ({ drinkId }) => {
   );
 
   return (
-    <Container>
-      <Title>{name}</Title>
-      <Ingredients>
-        {measures.map((measure, i) => (
-          <Step key={measure + ingredients[i]}>
-            <span>{measure}</span>
-            <span>{upperCase(ingredients[i])}</span>
-          </Step>
-        ))}
-      </Ingredients>
-      <Instructions>{method}</Instructions>
-      <ImageContainer>
-        <Image src={image} />
-      </ImageContainer>
-      <Glass>{glass}</Glass>
-    </Container>
+    <>
+      <h1>
+        <MartiniGlass /> My Drinks
+      </h1>
+      <Container>
+        <Title>{name}</Title>
+        <Ingredients>
+          {measures.map((measure, i) => (
+            <Step key={measure + ingredients[i]}>
+              <span>{measure}</span>
+              <span>{upperCase(ingredients[i])}</span>
+            </Step>
+          ))}
+        </Ingredients>
+        <Instructions>{method}</Instructions>
+        <ImageContainer>
+          <Image src={image} />
+        </ImageContainer>
+        <Glass>{glass}</Glass>
+      </Container>
+    </>
   );
 };
 
@@ -46,6 +50,7 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: repeat(3, auto);
   grid-template-columns: repeat(3, 1fr);
+  margin-top: 2rem;
   border: ${border};
   color: hsl(20, 10%, 10%);
   @media (min-width: 40em) {
@@ -58,7 +63,7 @@ const Container = styled.div`
   }
 `;
 
-const Title = styled.h1`
+const Title = styled.h2`
   padding: 0.5rem;
   background-color: white;
   text-align: center;

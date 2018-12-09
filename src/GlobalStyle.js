@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   :root {
-    --hue: ${p => p.themeHue};
+    --hue: ${p => p.themeHue || '200'};
   }
   * {
     box-sizing: border-box;

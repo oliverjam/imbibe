@@ -1,7 +1,6 @@
-import React, { Fragment, Suspense, lazy, useState, useContext } from 'react';
+import React, { Fragment, Suspense, lazy, useState } from 'react';
 import { Router } from '@reach/router';
 
-import { HueContext } from './HueProvider';
 import GlobalStyle from './GlobalStyle';
 import Nav from './Nav';
 import IngredientList from './IngredientList';
@@ -11,7 +10,6 @@ const DrinksList = lazy(() => import('./DrinksList'));
 const Drink = lazy(() => import('./Drink'));
 
 function App() {
-  const { hue } = useContext(HueContext);
   const [myIngredients, setIngredients] = useState([
     'light rum',
     'ginger beer',
@@ -38,7 +36,7 @@ function App() {
 
   return (
     <Fragment>
-      <GlobalStyle themeHue={hue} />
+      <GlobalStyle />
       <Nav />
       <PageContainer>
         <Suspense fallback={<div>Loading...</div>}>
