@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from '@reach/router';
-import { BorderBox, border } from './css';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "@reach/router";
+import { BorderBox, border } from "./css";
 
 const capitalise = str => str[0].toUpperCase() + str.slice(1);
 
@@ -18,6 +18,7 @@ const Drink = ({ id, ingredients, name, image, missing }) => {
           ))}
         </List>
       </Content>
+      <Image src={image} width="2em" height="2em" loading="lazy" alt="" />
     </BorderBox>
   );
 };
@@ -44,13 +45,19 @@ const List = styled.ul`
 const Ing = styled.li`
   display: inline;
   font-size: 0.875rem;
-  text-decoration: ${p => (p.strike ? 'line-through' : 'none')};
+  text-decoration: ${p => (p.strike ? "line-through" : "none")};
   &:not(:first-child) {
     margin-left: 0.5ch;
   }
   &:not(:last-child)::after {
-    content: ',';
+    content: ",";
   }
+`;
+
+const Image = styled.img`
+  flex: 0 0 4em;
+  height: auto;
+  border-left: ${border};
 `;
 
 export default Drink;
