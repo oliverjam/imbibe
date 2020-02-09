@@ -11,23 +11,13 @@ const DrinksList = lazy(() => import("./DrinksList"));
 const Drink = lazy(() => import("./Drink"));
 
 function App() {
-  const [myIngredients, setIngredients] = useState([
-    "light rum",
-    "ginger beer",
-    "lemon peel",
-    "añejo rum",
-    "orange juice",
-    "lemon juice",
-    "ginger ale",
-    "applejack",
-    "grapefruit juice",
-    "gin",
-    "orange bitters",
-    "orange",
-    "cherry",
-    "dark rum",
-    "peach nectar",
-  ]);
+  const [myIngredients, setIngredients] = useState(() => {
+    const url = new URL(window.location);
+    const qs = new URLSearchParams(url.search);
+    const ingredients = qs.get("ingredients");
+    if (!ingredients || !ingredients.length) return [];
+    return ingredients.split(",");
+  });
   const selectIngredient = (newIng, { reset }) => {
     setIngredients([...myIngredients, newIng]);
     reset({ inputValue: "" });
