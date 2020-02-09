@@ -13,6 +13,7 @@ const IngredientList = ({
   const shareIngredients = () => {
     const encoded = myIngredients.join(",");
     const url = new URL(window.location);
+    url.pathname = "/drinks";
     url.search = `ingredients=${encoded}`;
     navigator.clipboard
       .writeText(url.toString())
